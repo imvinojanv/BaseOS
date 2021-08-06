@@ -10,6 +10,7 @@
         out dx, al           ; send the data to the I/O port
         ret                  ; return to the calling function
 
+
     global inb
 
     ; inb - returns a byte from the given I/O port
