@@ -52,7 +52,6 @@
             fb_write_cell(i, buf[i], FB_GREEN, FB_DARK_GREY);
         }
         return 0;
-       
     }
 
     #endif
