@@ -1,20 +1,25 @@
-#include "io.h"
 #include "fb.h"
 #include "serial_port.h"
 #include "memory_segments.h"
+#include "keyboard.h"
+#include "interrupts.h"
 
-    /* The C function */
-    int sum_of_three(int arg1, int arg2, int arg3)
-    {
-        return arg1 + arg2 + arg3;
-    }
-    
-    void run(){
-        char c[] = "Welcome";
-        write(c, 9);
 
-        serial_write(SERIAL_COM1_BASE, c, 7);
-        segments_install_gdt();
-        
-    }
     
+void kmain(){
+
+    //char msg[] = "welcome";
+    unsigned char scancode,ascii;
+    char asciicode[1];
+   
+    segments_install_gdt();
+    //serial_write(msg, sizeof(msg));
+    //fb_write(msg, sizeof(msg));
+    interrupts_install_idt();
+    scancode = keyboard_read_scan_code();
+    ascii = keyboard_scan_code_to_ascii(scancode);
+    asciicode[0] = ascii;
+    serial_write(asciicode, sizeof(asciicode));
+    //fb_write(asciicode, sizeof(asciicode));
+    
+}
