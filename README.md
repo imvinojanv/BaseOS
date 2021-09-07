@@ -1,2 +1,3 @@
-# minorOS-project
-This repository contains files that how to implement our own os
+# BaseOS-Project
+This project files that how to implement your<b> Own Opetaring System</b>..!
+
