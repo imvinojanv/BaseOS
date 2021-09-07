@@ -45,4 +45,4 @@ struct stack_state {
 void interrupt_handler(struct cpu_state cpu, unsigned int interrupt, struct stack_state stack);
 
 
-#endif /* INCLUDE_INTERRUPTS */
+#endif 

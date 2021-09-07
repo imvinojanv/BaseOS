@@ -1,5 +1,6 @@
 #include "fb.h"
 
+
 static char *fb = (char *)FB_BASE_ADDRESS;
 
 /** fb_move_cursor:
