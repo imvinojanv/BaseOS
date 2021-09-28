@@ -3,6 +3,8 @@
 #include "interrupts.h"
 #include "multiboot.h"
 #include "paging/paging.h"
+#include "user_mode/user_mode.h"
+#include "interrupt_enabler.h"
 
 void init(u32int kernelPhysicalStart, u32int kernelPhysicalEnd){
    segments_install_gdt();
@@ -14,23 +16,10 @@ int kmain(unsigned int ebx, u32int kernel_physical_start, u32int kernel_physical
    
    init(kernel_physical_start, kernel_physical_end);
 
-   multiboot_info_t *mbinfo = (multiboot_info_t *) ebx;
-   multiboot_module_t* modules = (multiboot_module_t*) mbinfo->mods_addr; 
-   unsigned int address_of_module = modules->mod_start;
-
-   if((mbinfo->mods_count) == 1){
-      char str[] = "Module successfully loaded\n";
-      serial_write(str,sizeof(str));
-      
-      typedef void (*call_module_t)(void);
-         call_module_t start_program = (call_module_t) address_of_module;
-         start_program();
-
-   }
-   else{
-      char str[] = "Multiple modules loaded\n";
-      serial_write(str,sizeof(str));
-   }
+   disable_hardware_interrupts();
+  	
+  	switch_to_user_mode();
 
    return 0;
 }
+
