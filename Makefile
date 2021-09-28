@@ -1,4 +1,4 @@
-    OBJECTS = loader.o kmain.o io.o fb.o serial_port.o memory_segments.o gdt.o interrupts.o interrupt_handlers.o pic.o keyboard.o idt.o common.o paging.o paging_enable.o memory.o isr.o
+    OBJECTS = loader.o kmain.o io.o fb.o serial_port.o gdt.o memory_segments.o keyboard.o interrupt_handlers.o interrupts.o pic.o idt.o common.o paging/paging.o heap/kheap.o isr.o utils/log.o user_mode/user_mode.o interrupt_enabler.o
     CC = gcc
     CFLAGS = -m32 -nostdlib -fno-builtin -fno-stack-protector \
          -Wno-unused -nostartfiles -nodefaultlibs -Wall -Wextra -Werror -c -masm=intel
@@ -35,4 +35,3 @@
 
     clean:
 	rm -rf *.o kernel.elf os.iso
-
